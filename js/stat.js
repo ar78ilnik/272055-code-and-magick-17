@@ -36,14 +36,16 @@ window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx);
 
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], POSITION_NAME_X += 100, POSITION_NAME_Y);
-    ctx.fillText(Math.round(times[i]), POSITION_TIME_X += 100, POSITION_TIME_Y);
+    ctx.fillText(names[i], POSITION_NAME_X += 90, POSITION_NAME_Y);
+    ctx.fillText(Math.round(times[i]), POSITION_TIME_X += 90, POSITION_TIME_Y);
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgb(255, 0, 0)';
     } else {
       ctx.fillStyle = 'rgb(0, 0,' + color + ')';
     }
-    ctx.fillRect(POSITION_RECT_X += 100, POSITION_RECT_Y, 40, (HEIGHT_RECT * (times[i] / -50)) / 100);
+    console.log((HEIGHT_RECT * (times[i] / -50)) / 100);
+    console.log(times[i]);
+    ctx.fillRect(POSITION_RECT_X += 90, POSITION_RECT_Y, 40, (HEIGHT_RECT * (times[i] / -50)) / 100);
     ctx.fillStyle = 'black';
   }
 };
