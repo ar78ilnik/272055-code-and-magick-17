@@ -1,5 +1,8 @@
 'use strict';
 
+var MIN = 128;
+var MAX = 255;
+
 var POSITION_NAME_X = 40;
 var POSITION_NAME_Y = 270;
 
@@ -9,7 +12,14 @@ var POSITION_TIME_Y = 100;
 var POSITION_RECT_X = 40;
 var POSITION_RECT_Y = 250;
 
-var HEIGHT_RECT = 150;
+var HEIGHT_RECT = -150;
+
+var positionNameX;
+positionNameX = POSITION_NAME_X;
+var positionTimeX;
+positionTimeX = POSITION_TIME_X;
+var positionRectX;
+positionRectX = POSITION_RECT_X;
 
 // Функция рисования облака и тени
 var renderCloud = function (ctx) {
@@ -25,27 +35,43 @@ var renderCloud = function (ctx) {
   ctx.fillText('Список результатов:', 180, 56);
 };
 
-function getRandomArbitrary(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+var color = function () {
+  return Math.floor(Math.random() * (MAX - MIN) + MIN);
+};
 
-var color = getRandomArbitrary(128, 255);
+// Функция поиска максимального элемента массива времен
+var getMaxElement = function (arr) {
+  var maxElement = arr[0];
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] > maxElement) {
+      maxElement = arr[i];
+    }
+  }
+  return maxElement;
+};
 
 //  Функция генерации статистики
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx);
 
+  // Функция поиска максимального элемента массива времен
+  var maxTime = getMaxElement(times);
+  maxTime = Math.floor(maxTime);
+
+
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], POSITION_NAME_X += 90, POSITION_NAME_Y);
-    ctx.fillText(Math.round(times[i]), POSITION_TIME_X += 90, POSITION_TIME_Y);
+    ctx.fillText(names[i], positionNameX += 90, POSITION_NAME_Y);
+    ctx.fillText(Math.round(times[i]), positionTimeX += 90, POSITION_TIME_Y);
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgb(255, 0, 0)';
     } else {
-      ctx.fillStyle = 'rgb(0, 0,' + color + ')';
+      ctx.fillStyle = 'rgb(0, 0,' + color() + ')';
     }
-    console.log((HEIGHT_RECT * (times[i] / -50)) / 100);
-    console.log(times[i]);
-    ctx.fillRect(POSITION_RECT_X += 90, POSITION_RECT_Y, 40, (HEIGHT_RECT * (times[i] / -50)) / 100);
+
+    ctx.fillRect(positionRectX += 90, POSITION_RECT_Y, 40, ((HEIGHT_RECT * times[i]) / maxTime));
     ctx.fillStyle = 'black';
   }
+  positionNameX = 40;
+  positionTimeX = positionNameX;
+  positionRectX = 40;
 };
