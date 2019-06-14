@@ -14,13 +14,6 @@ var POSITION_RECT_Y = 250;
 
 var HEIGHT_RECT = -150;
 
-var positionNameX;
-positionNameX = POSITION_NAME_X;
-var positionTimeX;
-positionTimeX = POSITION_TIME_X;
-var positionRectX;
-positionRectX = POSITION_RECT_X;
-
 // Функция рисования облака и тени
 var renderCloud = function (ctx) {
 
@@ -53,6 +46,10 @@ var getMaxElement = function (arr) {
 //  Функция генерации статистики
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx);
+
+  var positionNameX = POSITION_NAME_X;
+  var positionTimeX = POSITION_TIME_X;
+  var positionRectX = POSITION_RECT_X;
 
   // Функция поиска максимального элемента массива времен
   var maxTime = getMaxElement(times);
