@@ -35,8 +35,8 @@ var renderCloud = function (ctx) {
   ctx.fillText('Список результатов:', 180, 56);
 };
 
-var color = function () {
-  return Math.floor(Math.random() * (MAX - MIN) + MIN);
+var color = function (min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 // Функция поиска максимального элемента массива времен
@@ -65,7 +65,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgb(255, 0, 0)';
     } else {
-      ctx.fillStyle = 'rgb(0, 0,' + color() + ')';
+      ctx.fillStyle = 'rgb(0, 0,' + color(MIN, MAX) + ')';
     }
 
     ctx.fillRect(positionRectX += 90, POSITION_RECT_Y, 40, ((HEIGHT_RECT * times[i]) / maxTime));
