@@ -68,7 +68,4 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillRect(positionRectX += 90, POSITION_RECT_Y, 40, ((HEIGHT_RECT * times[i]) / maxTime));
     ctx.fillStyle = 'black';
   }
-  positionNameX = 40;
-  positionTimeX = positionNameX;
-  positionRectX = 40;
 };
