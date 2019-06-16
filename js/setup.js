@@ -2,7 +2,7 @@
 
 var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристов', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var COAT_COLOR = [
+var COAT_COLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
   'rgb(146, 100, 161)',
@@ -10,7 +10,7 @@ var COAT_COLOR = [
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'
 ];
-var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var setupBlock = document.querySelector('.setup');
 setupBlock.classList.remove('hidden');
@@ -24,85 +24,85 @@ var Max = 8;
 var namesMas = [];
 var surNamesMas = [];
 
-var names = function (massiv1, min, max) {
+var getNames = function (massiv1, min, max) {
   for (var i = 0; i < Max; i++) {
     var ranName = Min + Math.floor(Math.random() * (max + 1 - min));
     namesMas.push(NAMES[ranName]);
   }
   return namesMas;
 };
-names(namesMas, Min, Max);
+getNames(namesMas, Min, Max);
 
-var surNames = function (massiv2, min, max) {
+var getSurnames = function (massiv2, min, max) {
   for (var i = 0; i < Max; i++) {
     var ranName1 = Min + Math.floor(Math.random() * (max + 1 - min));
     surNamesMas.push(SURNAMES[ranName1]);
   }
   return surNamesMas;
 };
-surNames(surNamesMas, Min, Max);
+getSurnames(surNamesMas, Min, Max);
 
-var all = [];
+var namesAndSurnames = [];
 for (var i = 0; i < Max; i++) {
-  all.push(namesMas[i] + ' ' + surNamesMas[i]);
+  namesAndSurnames.push(namesMas[i] + ' ' + surNamesMas[i]);
 }
 
 // 2. Функция выбора цвета мантии
 
-var coatColor = function (min, max) {
+var getCoatColor = function (min, max) {
   var color1 = Math.floor(Math.random() * (max - min) + min);
-  return COAT_COLOR[color1];
+  return COAT_COLORS[color1];
 };
 
 // 3. Функция выбора цвета глаз
 
-var eyesColor = function (min, max) {
+var getEyesColor = function (min, max) {
   var color2 = Math.floor(Math.random() * (max - min) + min);
-  return EYES_COLOR[color2];
+  return EYES_COLORS[color2];
 };
 
 // 4. Создание массива похожих персонажей
 
 var personages = [
   {
-    name: all[0],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[0],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[1],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[1],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[2],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[2],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[3],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[3],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[4],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[4],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[5],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[5],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[6],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[6],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   },
   {
-    name: all[7],
-    propCoatColor: coatColor(0, 6),
-    propEyesColor: eyesColor(0, 5)
+    name: namesAndSurnames[7],
+    propCoatColor: getCoatColor(0, 6),
+    propEyesColor: getEyesColor(0, 5)
   }
 ];
 
