@@ -19,109 +19,45 @@ setupBlock.querySelector('.setup-similar').classList.remove('hidden');
 // Блок подготовки данных для массива
 
 // 1. Функция подготовки имен персонажей
-var Min = 0;
-var Max = 8;
-var namesMas = [];
-var surNamesMas = [];
 
-var getNames = function (massiv1, min, max) {
-  for (var i = 0; i < Max; i++) {
-    var ranName = Min + Math.floor(Math.random() * (max + 1 - min));
-    namesMas.push(NAMES[ranName]);
+var getRandomValue = function (values) {
+  var index = Math.floor(Math.random() * values.length);
+  return values[index];
+};
+
+var createWizards = function (wizardCount) {
+  var wizards = [];
+  for (var i = 0; i < wizardCount; i++) {
+    var wizard = {
+      name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
+      coatColor: getRandomValue(COAT_COLORS),
+      eyesColor: getRandomValue(EYES_COLORS)
+    };
+    wizards.push(wizard);
   }
-  return namesMas;
-};
-getNames(namesMas, Min, Max);
-
-var getSurnames = function (massiv2, min, max) {
-  for (var i = 0; i < Max; i++) {
-    var ranName1 = Min + Math.floor(Math.random() * (max + 1 - min));
-    surNamesMas.push(SURNAMES[ranName1]);
-  }
-  return surNamesMas;
-};
-getSurnames(surNamesMas, Min, Max);
-
-var namesAndSurnames = [];
-for (var i = 0; i < Max; i++) {
-  namesAndSurnames.push(namesMas[i] + ' ' + surNamesMas[i]);
-}
-
-// 2. Функция выбора цвета мантии
-
-var getCoatColor = function (min, max) {
-  var color1 = Math.floor(Math.random() * (max - min) + min);
-  return COAT_COLORS[color1];
+  return wizards;
 };
 
-// 3. Функция выбора цвета глаз
-
-var getEyesColor = function (min, max) {
-  var color2 = Math.floor(Math.random() * (max - min) + min);
-  return EYES_COLORS[color2];
-};
-
+// @TODO Сделать пункты 3-5 из задания
 // 4. Создание массива похожих персонажей
-
-var personages = [
-  {
-    name: namesAndSurnames[0],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[1],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[2],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[3],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[4],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[5],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[6],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  },
-  {
-    name: namesAndSurnames[7],
-    propCoatColor: getCoatColor(0, 6),
-    propEyesColor: getEyesColor(0, 5)
-  }
-];
+var wizards = createWizards(4);
 
 // Создание блока похожих персонажей
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-var renderWizard = function (arr) {
+var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = arr.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = arr.propCoatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = arr.propEyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   return wizardElement;
 };
 
 var fragment = document.createDocumentFragment();
-for (var k = 0; k < SURNAMES.length; k++) {
-  fragment.appendChild(renderWizard(personages[k]));
+
+for (var i = 0; i < wizards.length; i++) {
+  fragment.appendChild(renderWizard(wizards[i]));
 }
 similarListElement.appendChild(fragment);
-
 
