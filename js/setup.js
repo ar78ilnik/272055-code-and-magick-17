@@ -16,10 +16,6 @@ var setupBlock = document.querySelector('.setup');
 setupBlock.classList.remove('hidden');
 setupBlock.querySelector('.setup-similar').classList.remove('hidden');
 
-// Блок подготовки данных для массива
-
-// 1. Функция подготовки имен персонажей
-
 var getRandomValue = function (values) {
   var index = Math.floor(Math.random() * values.length);
   return values[index];
@@ -38,11 +34,8 @@ var createWizards = function (wizardCount) {
   return wizards;
 };
 
-// @TODO Сделать пункты 3-5 из задания
-// 4. Создание массива похожих персонажей
 var wizards = createWizards(4);
 
-// Создание блока похожих персонажей
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
