@@ -13,8 +13,33 @@ var COAT_COLORS = [
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var setupBlock = document.querySelector('.setup');
-setupBlock.classList.remove('hidden');
-setupBlock.querySelector('.setup-similar').classList.remove('hidden');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setupBlock.querySelector('.setup-close');
+var coatSetup = document.querySelector('.wizard-coat');
+
+setupOpen.addEventListener('click', function () {
+  setupBlock.classList.remove('hidden');
+});
+
+setupClose.addEventListener('click', function () {
+  setupBlock.classList.add('hidden');
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    setupBlock.classList.remove('hidden');
+  }
+});
+
+setupClose.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === 27 || evt.keyCode === 13) {
+    setupBlock.classList.add('hidden');
+  }
+});
+
+coatSetup.addEventListener('click', function () {
+
+});
 
 var getRandomValue = function (values) {
   var index = Math.floor(Math.random() * values.length);
