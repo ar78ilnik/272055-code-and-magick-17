@@ -2,6 +2,7 @@
 
 var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристов', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var COAT_COLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -10,7 +11,6 @@ var COAT_COLORS = [
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'
 ];
-var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLOR = [
   '#ee4830',
   '#30a8ee',
@@ -22,9 +22,10 @@ var FIREBALL_COLOR = [
 var setupBlock = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setupBlock.querySelector('.setup-close');
-var coatSetup = document.querySelector('.wizard-coat');
-var eyesSetup = document.querySelector('.wizard-eyes');
-var fireballSetup = document.querySelector('.setup-fireball-wrap');
+var setupCoat = document.querySelector('.wizard-coat');
+var setupEyes = document.querySelector('.wizard-eyes');
+var setupFireball = document.querySelector('.setup-fireball-wrap');
+var hiddenInputSetup = setupFireball.children[0];
 
 setupOpen.addEventListener('click', function () {
   setupBlock.classList.remove('hidden');
@@ -44,6 +45,20 @@ setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 27 || evt.keyCode === 13) {
     setupBlock.classList.add('hidden');
   }
+});
+
+setupCoat.addEventListener('click', function (evt) {
+  evt.target.setAttribute('style', 'fill:' + getRandomValue(COAT_COLORS));
+});
+
+setupEyes.addEventListener('click', function (evt) {
+  evt.target.setAttribute('style', 'fill:' + getRandomValue(EYES_COLORS));
+});
+
+setupFireball.addEventListener('click', function (evt) {
+  var background = getRandomValue(FIREBALL_COLOR);
+  evt.target.setAttribute('style', 'background: ' + background);
+  hiddenInputSetup.setAttribute('value', background);
 });
 
 var getRandomValue = function (values) {
@@ -83,15 +98,3 @@ for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
 similarListElement.appendChild(fragment);
-
-coatSetup.addEventListener('click', function (evt) {
-  evt.target.setAttribute('style', 'fill:' + getRandomValue(COAT_COLORS));
-});
-
-eyesSetup.addEventListener('click', function(evt) {
-  evt.target.setAttribute('style', 'fill:' + getRandomValue(EYES_COLORS));
-})
-
-fireballSetup.addEventListener('click', function(evt) {
-  evt.target.setAttribute('style', 'background:' + getRandomValue(FIREBALL_COLOR));
-})
