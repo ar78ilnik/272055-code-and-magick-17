@@ -18,6 +18,8 @@ var FIREBALL_COLOR = [
   '#e848d5',
   '#e6e848'
 ];
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 var setupBlock = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
@@ -25,25 +27,40 @@ var setupClose = setupBlock.querySelector('.setup-close');
 var setupCoat = document.querySelector('.wizard-coat');
 var setupEyes = document.querySelector('.wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
-var hiddenInputSetup = setupFireball.children[0];
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE || evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function() {
+  setupBlock.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setupBlock.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
 
 setupOpen.addEventListener('click', function () {
-  setupBlock.classList.remove('hidden');
-});
-
-setupClose.addEventListener('click', function () {
-  setupBlock.classList.add('hidden');
+  openPopup();
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
-    setupBlock.classList.remove('hidden');
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
   }
 });
 
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 27 || evt.keyCode === 13) {
-    setupBlock.classList.add('hidden');
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
   }
 });
 
@@ -55,10 +72,10 @@ setupEyes.addEventListener('click', function (evt) {
   evt.target.setAttribute('style', 'fill:' + getRandomValue(EYES_COLORS));
 });
 
-setupFireball.addEventListener('click', function (evt) {
+setupFireball.addEventListener('click', function () {
   var background = getRandomValue(FIREBALL_COLOR);
-  evt.target.setAttribute('style', 'background: ' + background);
-  hiddenInputSetup.setAttribute('value', background);
+  setupFireball.setAttribute('style', 'background: ' + background);
+  document.querySelector('input[name="fireball-color"]').setAttribute('value', background);
 });
 
 var getRandomValue = function (values) {
