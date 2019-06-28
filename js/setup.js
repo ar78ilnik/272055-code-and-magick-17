@@ -34,7 +34,7 @@ var onPopupEscPress = function (evt) {
   }
 };
 
-var openPopup = function() {
+var openPopup = function () {
   setupBlock.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
