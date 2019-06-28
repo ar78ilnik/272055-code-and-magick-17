@@ -28,8 +28,12 @@ var setupCoat = document.querySelector('.wizard-coat');
 var setupEyes = document.querySelector('.wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
 
+var isEnterOrEsc = function (evtObj) {
+  return evtObj.key === ESC_KEYCODE || evtObj.key === ENTER_KEYCODE;
+};
+
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE || evt.keyCode === ENTER_KEYCODE) {
+  if (isEnterOrEsc(evt)) {
     closePopup();
   }
 };
@@ -49,7 +53,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (onPopupEscPress(evt)) {
     openPopup();
   }
 });
@@ -59,7 +63,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (isEnterOrEsc(evt)) {
     closePopup();
   }
 });
