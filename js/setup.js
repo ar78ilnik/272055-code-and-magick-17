@@ -114,6 +114,17 @@
     return wizardElement;
   };
 
+  var render = function (data) {
+    var takeNumber = data.length > 4 ? 4 : data.length;
+    similarWizardTemplate.innerHTML = '';
+    for (var i = 0; i < takeNumber; i++) {
+      similarWizardTemplate.appendChild(renderWizard(data[i]));
+    }
+    similarListElement.classList.remove('hidden');
+  };
+
+  var wizardsArray = [];
+
   var form = setupBlock.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
     window.upload(new FormData(form), function () {
@@ -122,7 +133,9 @@
     evt.preventDefault();
   });
 
-  var successHandler = function () {
+  var successHandler = function (data) {
+    wizardsArray = data;
+    render(wizardsArray);
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < 4; i++) {
       fragment.appendChild(renderWizard(wizards[i]));
@@ -141,5 +154,6 @@
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
   };
+
   window.load(successHandler, errorHandler);
 })();
